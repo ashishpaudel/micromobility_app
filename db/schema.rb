@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_02_07_141354) do
+ActiveRecord::Schema.define(version: 2023_02_12_131950) do
+
+  create_table "bikes", force: :cascade do |t|
+    t.string "number", null: false
+    t.string "location", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["location", "number"], name: "index_bikes_on_location_and_number", unique: true
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false

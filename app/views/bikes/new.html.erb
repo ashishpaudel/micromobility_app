@@ -1,0 +1,17 @@
+<h1>New Article</h1>
+
+<%= form_with model: @bike do |form| %>
+  <div>
+    <%= form.label :Bikenumber %><br>
+    <%= form.text_field :number %>
+  </div>
+
+  <div>
+    <%= form.label :CurrentLocation %><br>
+    <%= form.text_area :location %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
