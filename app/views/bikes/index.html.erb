@@ -1,1 +1,72 @@
-"hello ashish"
+<nav class="navbar navbar-light bg-light justify-content-between">
+  <a class="navbar-brand">MicroMobility App</a>
+  <a><%= link_to "logout", destroy_user_session_path, method: :delete %></a>
+</nav>
+<div class="container">
+<div class="row"> 
+ <div class="col col-sm-2">&nbsp </div>
+ <div class="col-sm-6"></div>
+</div>
+  <div class="row"> 
+    <div class="col col-sm-2"> hello, <i><%= current_user['email'].split('@')[0] %></i> Welcome!</div>
+    <div class="col-sm-6">
+      <p> In search button you can search any location to see the available bikes : </p>
+    </div>
+  </div>
+  <div class="row"> 
+  <div class="col col-sm-2"></div>
+  <div class="col-sm-6">
+  <%= form_tag(bikes_path, :method => "get", id: "search-form") do %>
+    <%= text_field_tag :search, params[:search], placeholder: "Search available Bikes to your location", class: 'form-control' %>
+    <span class="input-group-btn">
+      <%= submit_tag "Search", class: 'btn btn-outline-success my-2 my-sm-0' %>
+    </span>
+  <% end %>
+  </div>
+
+  <% if !@bikes.present?%>
+  <div class="row"> 
+   <div class="col col-sm-2">&nbsp </div>
+   <div class="col-sm-6">OR Indicate on map below: </div>
+  </div>
+  <%end%>
+  <div class="row"> 
+    <div class="col col-sm-2">&nbsp </div><br>
+    <div class="col-sm-6"></div>
+  </div>
+
+  <% if @bikes.present? %>
+    <div class="row"> 
+      <div class="col col-sm-2">&nbsp </div><br>
+      <div class="col-sm-6">The available bikes for you on your location are: </div>
+    </div>
+    <% @bikes.each do |bike|%>
+      <div class="row">
+        <div class="col col-sm-2"> </div>
+        <div class="col-sm-6 card">
+         bike number: <%= bike.number %><br>
+         bike location: <%= bike.location %>
+        </div>
+      </div><br>
+    <% end %>
+  <%elsif (response.status == 200) && params[:search].present? %>
+    <div class="row"> 
+      <div class="col col-sm-2">&nbsp </div><br>
+      <div class="col-sm-6">Sorry, No bikes available in this location. </div>
+    </div>
+  <%end%>
+
+  <div class="row"> 
+   <div class="col col-sm-2">&nbsp </div>
+   <div class="col-sm-6"></div>
+  </div>
+
+  <div class="row"> 
+    <div class="col col-sm-2"> </div>
+    <div class="col-sm-6">
+    <%= image_tag "kathmandu_city_map.jpeg", height: 300 %>
+    </div>
+  </div>
+
+ </div>
+</div>
