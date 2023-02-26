@@ -11,6 +11,17 @@
   </head>
 
   <body>
+    
+  <% if notice %>
+    <p class="alert alert-success"><%= notice %></p>
+  <% end %>
+  <% if alert %>
+    <p class="alert alert-danger"><%= alert %></p>
+  <% end %>
+  <nav class="navbar navbar-light bg-light justify-content-between">
+  <%= link_to "Micromobility App", root_path, {:style => "text-decoration: none;" "color: black" }%>
+  <a><%= link_to "logout", destroy_user_session_path, method: :delete %></a>
+  </nav>
     <%= yield %>
   </body>
 </html>

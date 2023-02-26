@@ -1,7 +1,26 @@
-<nav class="navbar navbar-light bg-light justify-content-between">
-  <a class="navbar-brand">MicroMobility App</a>
-  <a><%= link_to "logout", destroy_user_session_path, method: :delete %></a>
-</nav>
+<% if current_user.is_admin? %>
+  <div class="container">
+    <div class="row"> 
+      <div class="col col-sm-4">&nbsp </div>
+      <div class="col-sm-6">
+       Create Bike Below :
+      </div>
+    </div>
+    <div class="row"> 
+      <div class="col col-sm-4"></div>
+      <div class="col-sm-6">
+      <%= form_with model: @bike do |form| %>
+        <%= form.label :BikeNumber %>
+        <%= form.text_field :number %>
+        <%= form.label :BikeLocation %>
+        <%= form.text_field :location %>
+        <%= form.submit %>
+      <% end %>
+      </div>
+      <div class="col col-sm-4"></div>
+   </div>
+   </div>
+<% else %>
 <div class="container">
 <div class="row"> 
  <div class="col col-sm-2">&nbsp </div>
@@ -46,6 +65,7 @@
         <div class="col-sm-6 card">
          bike number: <%= bike.number %><br>
          bike location: <%= bike.location %>
+         <button type="button" class="btn btn-primary btn-sm">Ride Now</button>
         </div>
       </div><br>
     <% end %>
@@ -70,3 +90,4 @@
 
  </div>
 </div>
+<%end%>

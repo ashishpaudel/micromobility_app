@@ -10,7 +10,13 @@ class BikesController < ApplicationController
     end
     
     def create
-        @bike = Bike.new(number: params[:bike][:number], location: params[:bike][:location])
+        @bike = Bike.new(number: params[:number], location: params[:location])
         @bike.save
+        flash[:notice] = "bike created successfully"
+        redirect_to :root
+    end
+
+    def show
+        @bike = Bike.find(params[:id])
     end
 end
